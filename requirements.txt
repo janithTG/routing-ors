@@ -1,0 +1,8 @@
+streamlit==1.36.0
+pandas==2.2.2
+matplotlib==3.9.0
+folium==0.16.0
+openrouteservice==2.3.3
+ortools==9.10.4067
+python-dotenv==1.0.1
+protobuf<=4.25.3     # helps avoid or-tools/protobuf conflicts on cloud
