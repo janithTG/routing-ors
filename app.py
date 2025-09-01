@@ -39,12 +39,10 @@ st.caption("Upload your deliveries, set depots + parameters, and compare OLD vs 
 
 with st.sidebar:
     st.subheader("OpenRouteService")
-    ors_key = st.text_input(
-        "OPENROUTESERVICE_API_KEY",
-        value=os.getenv("OPENROUTESERVICE_API_KEY", ""),
-        type="password",
-        help="Paste your ORS key here (or set it as an environment variable)."
-    )
+    # Prefer Streamlit secrets on Cloud; fallback to env var or user input
+    default_key = os.getenv("OPENROUTESERVICE_API_KEY", "")
+    default_key = st.secrets.get("OPENROUTESERVICE_API_KEY", default_key) if hasattr(st, "secrets") else default_key
+    ors_key = st.text_input("OPENROUTESERVICE_API_KEY", value=default_key, type="password")
 
     st.subheader("Routing Inputs")
     old_warehouse = st.text_input("Old Depot (address or 'lat,lon')", value="")
